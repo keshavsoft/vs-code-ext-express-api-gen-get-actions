@@ -1,0 +1,92 @@
+{
+  "name": "vs-code-ext-express-api-gen-get-actions",
+  "displayName": "express api actions generate",
+  "description": "express generate from endpoints file, with actions",
+  "publisher": "KeshavSoft",
+  "type": "module",
+  "version": "1.1.1",
+  "engines": {
+    "vscode": "^1.116.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/keshavsoft/vs-code-ext-express-api-gen-get-actions.git"
+  },
+  "activationEvents": [],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.editor.title.endpoints.insert",
+        "title": "insert"
+      },
+      {
+        "command": "extension.editor.title.endpoints.delete",
+        "title": "delete"
+      },
+      {
+        "command": "extension.editor.title.endpoints.alter",
+        "title": "alter"
+      },
+      {
+        "command": "extension.editor.title.endpoints.get",
+        "title": "get"
+      },
+      {
+        "command": "extension.split",
+        "title": "split"
+      }
+    ],
+    "menus": {
+      "explorer/context": [],
+      "editor/context": [],
+      "editor/title": [
+        {
+          "command": "extension.editor.title.endpoints.insert",
+          "when": "resourceFilename == end-points.js",
+          "group": "navigation@7"
+        },
+        {
+          "command": "extension.editor.title.endpoints.delete",
+          "when": "resourceFilename == end-points.js",
+          "group": "navigation@8"
+        },
+        {
+          "command": "extension.editor.title.endpoints.alter",
+          "when": "resourceFilename == end-points.js",
+          "group": "navigation@10"
+        },
+        {
+          "command": "extension.editor.title.endpoints.get",
+          "when": "resourceFilename == end-points.js",
+          "group": "navigation@7"
+        },
+        {
+          "command": "extension.split",
+          "when": "resourceFilename == end-points.js",
+          "group": "navigation@7"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.116.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "eslint": "^9.39.3",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2"
+  },
+  "dependencies": {
+    "@keshavsoft/kschema-cli": "^1.17.2",
+    "kschema-fs-api-gen-get-actions": "^1.3.2"
+  }
+}
