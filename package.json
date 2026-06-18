@@ -1,10 +1,10 @@
 {
   "name": "vs-code-ext-express-api-gen-get-actions",
-  "displayName": "express api actions generate",
-  "description": "express generate from endpoints file, with actions",
+  "displayName": "express api get actions generate",
+  "description": "express generate from endpoints file, get actions",
   "publisher": "KeshavSoft",
   "type": "module",
-  "version": "1.2.1",
+  "version": "1.2.3",
   "engines": {
     "vscode": "^1.116.0"
   },
@@ -20,8 +20,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "extension.split",
-        "title": "split"
+        "command": "extension.express.api.gen.get.actions",
+        "title": "SplitGet"
       }
     ],
     "menus": {
@@ -29,7 +29,7 @@
       "editor/context": [],
       "editor/title": [
         {
-          "command": "extension.split",
+          "command": "extension.express.api.gen.get.actions",
           "when": "resourceFilename == end-points.js",
           "group": "navigation@7"
         }
