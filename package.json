@@ -20,22 +20,6 @@
   "contributes": {
     "commands": [
       {
-        "command": "extension.editor.title.endpoints.insert",
-        "title": "insert"
-      },
-      {
-        "command": "extension.editor.title.endpoints.delete",
-        "title": "delete"
-      },
-      {
-        "command": "extension.editor.title.endpoints.alter",
-        "title": "alter"
-      },
-      {
-        "command": "extension.editor.title.endpoints.get",
-        "title": "get"
-      },
-      {
         "command": "extension.split",
         "title": "split"
       }
@@ -44,26 +28,6 @@
       "explorer/context": [],
       "editor/context": [],
       "editor/title": [
-        {
-          "command": "extension.editor.title.endpoints.insert",
-          "when": "resourceFilename == end-points.js",
-          "group": "navigation@7"
-        },
-        {
-          "command": "extension.editor.title.endpoints.delete",
-          "when": "resourceFilename == end-points.js",
-          "group": "navigation@8"
-        },
-        {
-          "command": "extension.editor.title.endpoints.alter",
-          "when": "resourceFilename == end-points.js",
-          "group": "navigation@10"
-        },
-        {
-          "command": "extension.editor.title.endpoints.get",
-          "when": "resourceFilename == end-points.js",
-          "group": "navigation@7"
-        },
         {
           "command": "extension.split",
           "when": "resourceFilename == end-points.js",
