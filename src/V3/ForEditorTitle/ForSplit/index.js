@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import fs from 'fs';
 import path from 'path';
 
-import ShowAll from "../../CommonCommands/ShowAll/v1/orchestration/startOrchestration.js";
+import ShowAll from "../../CommonCommands/ShowAll/v2/orchestration/startOrchestration.js";
 import Find from "../../CommonCommands/Find/v1/orchestration/startOrchestration.js";
 
 const splitEditor = async (context, uri) => {
