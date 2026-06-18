@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 
 import ShowAll from "../../CommonCommands/ShowAll/v1/orchestration/startOrchestration.js";
+import Find from "../../CommonCommands/Find/v1/orchestration/startOrchestration.js";
 
 const splitEditor = async (context, uri) => {
     const panel = vscode.window.createWebviewPanel(
@@ -18,6 +19,10 @@ const splitEditor = async (context, uri) => {
         (message) => {
             if (message.action === "showAll") {
                 ShowAll({ uri });
+            };
+
+            if (message.action === "find") {
+                Find({ uri });
             };
         }
     );

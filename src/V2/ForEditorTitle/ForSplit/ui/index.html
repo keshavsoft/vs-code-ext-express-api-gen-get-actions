@@ -45,6 +45,23 @@
                         showAll using lowdb
                     </div>
                 </button>
+
+                <button onclick="find()" class="group bg-[#252526]
+                    border border-gray-700
+                    rounded-xl p-5 text-left
+                    hover:border-blue-500
+                    hover:bg-[#2d2d30]
+                    transition-all">
+                    <div class="text-2xl mb-2">🔢</div>
+
+                    <div class="font-medium">
+                        find
+                    </div>
+
+                    <div class="text-sm text-gray-400">
+                        find using lowdb
+                    </div>
+                </button>
             </div>
 
         </div>
@@ -63,15 +80,15 @@
     <script>
         const vscode = acquireVsCodeApi();
 
-        function InsertGenPk() {
-            vscode.postMessage({
-                action: "InsertGenPk"
-            });
-        };
-
         function showAll() {
             vscode.postMessage({
                 action: "showAll"
+            });
+        };
+
+        function find() {
+            vscode.postMessage({
+                action: "find"
             });
         };
 
