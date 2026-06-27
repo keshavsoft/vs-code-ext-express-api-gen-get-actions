@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import path from 'path';
+import fs from "fs";
 
 import { getHtmlWithScripts } from "./utils/htmlLoader.js";
 import { handleWebviewMessage } from "./services/messageRouter.js";
@@ -17,12 +18,23 @@ const activateHtml = (context, uri) => {
     panel.webview.onDidReceiveMessage(async (message) => {
         const userRootFolder = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
         const folderPath = path.dirname(uri.fsPath);
+        const envPath = path.join(userRootFolder, ".env");
+
+        const env = Object.fromEntries(
+            fs.readFileSync(envPath, "utf8")
+                .split("\n")
+                .filter(line => line && !line.startsWith("#"))
+                .map(line => line.split("="))
+        );
+
+        const portNumber = env.PORT;
 
         await handleWebviewMessage({
             message,
             panel,
             toPath: folderPath,
-            inTargetPath: userRootFolder
+            inTargetPath: userRootFolder,
+            inPort: portNumber
         });
     });
 };

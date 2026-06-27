@@ -4,7 +4,8 @@ export async function executeGenerationTask({
     tableName,
     toPath,
     inTargetPath,
-    generateFunc
+    generateFunc,
+    inPort = 4000
 }) {
     panel.webview.postMessage({
         type: "status",
@@ -18,7 +19,8 @@ export async function executeGenerationTask({
             toPath,
             tableName,
             inTargetPath,
-            inGenerateRest: true
+            inGenerateRest: true,
+            inPort
         });
 
         panel.webview.postMessage({

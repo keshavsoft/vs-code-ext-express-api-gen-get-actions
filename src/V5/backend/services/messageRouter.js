@@ -3,14 +3,17 @@ import showAllAction from "./actions/showAll.js";
 import filterQueryAction from "./actions/filterQuery.js";
 import lastRecordAction from "./actions/lastRecord.js";
 
-export async function handleWebviewMessage({ message, panel, toPath, inTargetPath }) {
+export async function handleWebviewMessage({ message, panel, toPath, inTargetPath,
+    inPort
+}) {
+
     switch (message.action) {
         case "showAll":
             await showAllAction({
                 panel,
                 tableName: message.tableName,
                 toPath,
-                inTargetPath
+                inTargetPath, inPort
             });
             break;
 
@@ -19,7 +22,7 @@ export async function handleWebviewMessage({ message, panel, toPath, inTargetPat
                 panel,
                 tableName: message.tableName,
                 toPath,
-                inTargetPath
+                inTargetPath, inPort
             });
             break;
 
@@ -28,7 +31,7 @@ export async function handleWebviewMessage({ message, panel, toPath, inTargetPat
                 panel,
                 tableName: message.tableName,
                 toPath,
-                inTargetPath
+                inTargetPath, inPort
             });
             break;
 
@@ -37,7 +40,7 @@ export async function handleWebviewMessage({ message, panel, toPath, inTargetPat
                 panel,
                 tableName: message.tableName,
                 toPath,
-                inTargetPath
+                inTargetPath, inPort
             });
             break;
 
