@@ -7,7 +7,6 @@ export function getHtmlWithScripts() {
 
     const jsFiles = [
         "vscodeApi.js",
-        "schemaManager.js",
         "actionDispatcher.js",
         "uiNotifier.js",
         "main.js"

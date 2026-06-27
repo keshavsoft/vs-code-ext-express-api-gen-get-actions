@@ -17,7 +17,8 @@ export async function executeGenerationTask({
             isAnnounce: true,
             toPath,
             tableName,
-            configPath
+            configPath,
+            inGenerateRest: true
         });
 
         panel.webview.postMessage({

@@ -1,4 +1,4 @@
-import { find } from 'kschema-fs-api-gen-get-actions';
+import { showAll } from 'kschema-fs-api-gen-get-actions';
 
 // import { withHeader } from "json-crud-ui-table";
 import { executeGenerationTask } from "../generatorService.js";
@@ -10,7 +10,7 @@ const startFunc = async ({ panel, tableName, toPath, schemasPath }) => {
         tableName,
         toPath,
         configPath: schemasPath,
-        generateFunc: find
+        generateFunc: showAll
     });
 };
 
