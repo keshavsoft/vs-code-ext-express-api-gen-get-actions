@@ -3,7 +3,7 @@ export async function executeGenerationTask({
     actionLabel,
     tableName,
     toPath,
-    configPath,
+    inTargetPath,
     generateFunc
 }) {
     panel.webview.postMessage({
@@ -17,7 +17,7 @@ export async function executeGenerationTask({
             isAnnounce: true,
             toPath,
             tableName,
-            configPath,
+            inTargetPath,
             inGenerateRest: true
         });
 

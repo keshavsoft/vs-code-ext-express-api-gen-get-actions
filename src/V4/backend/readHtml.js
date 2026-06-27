@@ -16,14 +16,13 @@ const activateHtml = (context, uri) => {
 
     panel.webview.onDidReceiveMessage(async (message) => {
         const userRootFolder = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
-        const schemasPath = userRootFolder ? path.join(userRootFolder, "Config", "Schemas") : undefined;
         const folderPath = path.dirname(uri.fsPath);
 
         await handleWebviewMessage({
             message,
             panel,
             toPath: folderPath,
-            schemasPath
+            inTargetPath: userRootFolder
         });
     });
 };

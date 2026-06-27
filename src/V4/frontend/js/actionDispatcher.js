@@ -9,3 +9,7 @@ function find() {
 function filterQuery() {
     sendAction("filterQuery");
 };
+
+function lastRecord() {
+    sendAction("lastRecord");
+};

@@ -1,15 +1,16 @@
 import findAction from "./actions/find.js";
 import showAllAction from "./actions/showAll.js";
 import filterQueryAction from "./actions/filterQuery.js";
+import lastRecordAction from "./actions/lastRecord.js";
 
-export async function handleWebviewMessage({ message, panel, toPath, schemasPath }) {
+export async function handleWebviewMessage({ message, panel, toPath, inTargetPath }) {
     switch (message.action) {
         case "showAll":
             await showAllAction({
                 panel,
                 tableName: message.tableName,
                 toPath,
-                schemasPath
+                inTargetPath
             });
             break;
 
@@ -18,7 +19,7 @@ export async function handleWebviewMessage({ message, panel, toPath, schemasPath
                 panel,
                 tableName: message.tableName,
                 toPath,
-                schemasPath
+                inTargetPath
             });
             break;
 
@@ -27,8 +28,18 @@ export async function handleWebviewMessage({ message, panel, toPath, schemasPath
                 panel,
                 tableName: message.tableName,
                 toPath,
-                schemasPath
+                inTargetPath
             });
             break;
+
+        case "lastRecord":
+            await lastRecordAction({
+                panel,
+                tableName: message.tableName,
+                toPath,
+                inTargetPath
+            });
+            break;
+
     }
 }
