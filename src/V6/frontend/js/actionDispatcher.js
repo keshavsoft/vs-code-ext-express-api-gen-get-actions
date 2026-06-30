@@ -13,3 +13,7 @@ function filterQuery() {
 function lastRecord() {
     sendAction("lastRecord");
 };
+
+function firstRecord() {
+    sendAction("firstRecord");
+};
