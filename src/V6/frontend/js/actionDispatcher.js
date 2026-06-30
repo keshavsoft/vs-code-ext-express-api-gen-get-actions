@@ -1,19 +1,24 @@
+function getNewFolderName() {
+    const input = document.getElementById("folder-name");
+    return input ? input.value.trim() : "";
+}
+
 function showAll() {
-    sendAction("showAll");
+    sendAction("showAll", { newFolderName: getNewFolderName() });
 }
 
 function find() {
-    sendAction("find");
+    sendAction("find", { newFolderName: getNewFolderName() });
 }
 
 function filterQuery() {
-    sendAction("filterQuery");
+    sendAction("filterQuery", { newFolderName: getNewFolderName() });
 };
 
 function lastRecord() {
-    sendAction("lastRecord");
+    sendAction("lastRecord", { newFolderName: getNewFolderName() });
 };
 
 function firstRecord() {
-    sendAction("firstRecord");
+    sendAction("firstRecord", { newFolderName: getNewFolderName() });
 };

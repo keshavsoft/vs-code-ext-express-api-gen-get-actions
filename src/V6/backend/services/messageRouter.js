@@ -1,3 +1,6 @@
+import path from "path";
+import fs from "fs";
+
 import findAction from "./actions/find.js";
 import showAllAction from "./actions/showAll.js";
 import filterQueryAction from "./actions/filterQuery.js";
@@ -7,13 +10,20 @@ import firstRecordAction from "./actions/firstRecord.js";
 export async function handleWebviewMessage({ message, panel, toPath, inTargetPath,
     inPort
 }) {
+    let targetPath = toPath;
+    if (message.newFolderName) {
+        targetPath = path.join(toPath, message.newFolderName);
+        if (!fs.existsSync(targetPath)) {
+            fs.mkdirSync(targetPath, { recursive: true });
+        }
+    }
 
     switch (message.action) {
         case "showAll":
             await showAllAction({
                 panel,
                 tableName: message.tableName,
-                toPath,
+                toPath: targetPath,
                 inTargetPath, inPort
             });
             break;
@@ -22,7 +32,7 @@ export async function handleWebviewMessage({ message, panel, toPath, inTargetPat
             await findAction({
                 panel,
                 tableName: message.tableName,
-                toPath,
+                toPath: targetPath,
                 inTargetPath, inPort
             });
             break;
@@ -31,7 +41,7 @@ export async function handleWebviewMessage({ message, panel, toPath, inTargetPat
             await filterQueryAction({
                 panel,
                 tableName: message.tableName,
-                toPath,
+                toPath: targetPath,
                 inTargetPath, inPort
             });
             break;
@@ -40,7 +50,7 @@ export async function handleWebviewMessage({ message, panel, toPath, inTargetPat
             await lastRecordAction({
                 panel,
                 tableName: message.tableName,
-                toPath,
+                toPath: targetPath,
                 inTargetPath, inPort
             });
             break;
@@ -49,7 +59,7 @@ export async function handleWebviewMessage({ message, panel, toPath, inTargetPat
             await firstRecordAction({
                 panel,
                 tableName: message.tableName,
-                toPath,
+                toPath: targetPath,
                 inTargetPath, inPort
             });
             break;
