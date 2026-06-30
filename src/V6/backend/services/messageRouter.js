@@ -11,12 +11,13 @@ export async function handleWebviewMessage({ message, panel, toPath, inTargetPat
     inPort
 }) {
     let targetPath = toPath;
-    if (message.newFolderName) {
-        targetPath = path.join(toPath, message.newFolderName);
-        if (!fs.existsSync(targetPath)) {
-            fs.mkdirSync(targetPath, { recursive: true });
-        }
-    }
+
+    // if (message.newFolderName) {
+    //     targetPath = path.join(toPath, message.newFolderName);
+    //     if (!fs.existsSync(targetPath)) {
+    //         fs.mkdirSync(targetPath, { recursive: true });
+    //     };
+    // };
 
     switch (message.action) {
         case "showAll":
@@ -59,8 +60,8 @@ export async function handleWebviewMessage({ message, panel, toPath, inTargetPat
             await firstRecordAction({
                 panel,
                 tableName: message.tableName,
-                toPath: targetPath,
-                inTargetPath, inPort
+                toPath,
+                inTargetPath, inPort, inFolderName: message.newFolderName
             });
             break;
 

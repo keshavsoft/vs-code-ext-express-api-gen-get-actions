@@ -3,7 +3,7 @@ import { firstRecord } from 'kschema-fs-api-gen-get-actions';
 import { executeGenerationTask } from "../generatorService.js";
 
 const startFunc = async ({ panel, tableName, toPath, inTargetPath,
-    inPort
+    inPort, inFolderName
 }) => {
 
     await executeGenerationTask({
@@ -13,7 +13,7 @@ const startFunc = async ({ panel, tableName, toPath, inTargetPath,
         toPath,
         inTargetPath,
         generateFunc: firstRecord,
-        inPort
+        inPort, inFolderName
     });
 };
 
