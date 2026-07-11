@@ -22,3 +22,7 @@ function lastRecord() {
 function firstRecord() {
     sendAction("firstRecord", { newFolderName: getNewFolderName() });
 };
+
+function distinct() {
+    sendAction("distinct", { newFolderName: getNewFolderName() });
+};
