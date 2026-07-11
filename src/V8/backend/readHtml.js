@@ -17,20 +17,7 @@ const activateHtml = (context, uri) => {
     panel.webview.html = getHtmlWithScripts();
 
     panel.webview.onDidReceiveMessage(async (message) => {
-        // const userRootFolder = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
-        // const folderPath = path.dirname(uri.fsPath);
-        // const envPath = path.join(userRootFolder, ".env");
-
         const { userRootFolder, schemasPath, folderPath, port } = getWorkspaceContext(uri);
-
-        // const env = Object.fromEntries(
-        //     fs.readFileSync(envPath, "utf8")
-        //         .split("\n")
-        //         .filter(line => line && !line.startsWith("#"))
-        //         .map(line => line.split("="))
-        // );
-
-        // const portNumber = env.PORT;
 
         await handleWebviewMessage({
             message,

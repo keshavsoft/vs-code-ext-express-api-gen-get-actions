@@ -1,6 +1,6 @@
-function getNewFolderName() {
+function getNewFolderName(inActionName) {
     const input = document.getElementById("folder-name");
-    return input ? input.value.trim() : "";
+    return input ? (input.value.trim() === "" ? inActionName : input.value.trim()) : "";
 }
 
 function showAll() {
@@ -24,13 +24,19 @@ function firstRecord() {
 };
 
 function distinct() {
-    sendAction("distinct", { newFolderName: getNewFolderName() });
+    const actionName = "distinct";
+
+    sendAction(actionName, { newFolderName: getNewFolderName(actionName) });
+};
+
+function count() {
+    sendAction("count", { newFolderName: getNewFolderName() });
 };
 
 function min() {
-    minAction("distinct", { newFolderName: getNewFolderName() });
+    sendAction("min", { newFolderName: getNewFolderName() });
 };
 
 function max() {
-    maxAction("distinct", { newFolderName: getNewFolderName() });
+    sendAction("max", { newFolderName: getNewFolderName() });
 };
