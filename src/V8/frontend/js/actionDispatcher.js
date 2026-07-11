@@ -26,3 +26,11 @@ function firstRecord() {
 function distinct() {
     sendAction("distinct", { newFolderName: getNewFolderName() });
 };
+
+function min() {
+    minAction("distinct", { newFolderName: getNewFolderName() });
+};
+
+function max() {
+    maxAction("distinct", { newFolderName: getNewFolderName() });
+};

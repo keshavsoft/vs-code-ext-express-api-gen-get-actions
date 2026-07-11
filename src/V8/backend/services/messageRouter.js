@@ -3,7 +3,10 @@ import showAllAction from "./actions/showAll.js";
 import filterQueryAction from "./actions/filterQuery.js";
 import lastRecordAction from "./actions/lastRecord.js";
 import firstRecordAction from "./actions/firstRecord.js";
+
 import distinct from "./actions/distinct.js";
+import min from "./actions/distinct.js";
+import max from "./actions/distinct.js";
 
 export async function handleWebviewMessage({ message, panel, toPath, inTargetPath,
     inPort
@@ -58,6 +61,25 @@ export async function handleWebviewMessage({ message, panel, toPath, inTargetPat
 
         case "distinct":
             await distinct({
+                panel,
+                tableName: message.tableName,
+                toPath,
+                inTargetPath, inPort, inFolderName: message.newFolderName
+            });
+            break;
+
+
+        case "min":
+            await min({
+                panel,
+                tableName: message.tableName,
+                toPath,
+                inTargetPath, inPort, inFolderName: message.newFolderName
+            });
+            break;
+
+        case "max":
+            await max({
                 panel,
                 tableName: message.tableName,
                 toPath,
