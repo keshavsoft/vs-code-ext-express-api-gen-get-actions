@@ -30,7 +30,9 @@ function distinct() {
 };
 
 function count() {
-    sendAction("count", { newFolderName: getNewFolderName() });
+    const actionName = "count";
+
+    sendAction(actionName, { newFolderName: getNewFolderName(actionName) });
 };
 
 function min() {
