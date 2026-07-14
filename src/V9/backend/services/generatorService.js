@@ -5,7 +5,8 @@ export async function executeGenerationTask({
     toPath,
     inTargetPath,
     generateFunc,
-    inPort = 4000, inFolderName
+    inPort = 4000, inFolderName,
+    actionName
 }) {
     panel.webview.postMessage({
         type: "status",
@@ -13,7 +14,7 @@ export async function executeGenerationTask({
     });
 
     try {
-        await generateFunc({
+        const fromNpm = await generateFunc({
             showLog: true,
             isAnnounce: true,
             toPath,
@@ -22,6 +23,17 @@ export async function executeGenerationTask({
             inGenerateRest: true,
             inPort, inFolderName
         });
+        console.log("fromNpm : ", fromNpm);
+
+        if (fromNpm && fromNpm.KTF === false) {
+            panel.webview.postMessage({
+                type: "complete",
+                error: true,
+                actionName,
+                errorMessage: fromNpm.KReason || "An error occurred during generation."
+            });
+            return;
+        }
 
         panel.webview.postMessage({
             type: "complete",
@@ -36,8 +48,10 @@ export async function executeGenerationTask({
         });
     } catch (error) {
         panel.webview.postMessage({
-            type: "status",
-            text: `❌ Generation failed: ${error.message}`
+            type: "complete",
+            error: true,
+            actionName,
+            errorMessage: error.message
         });
     }
 }

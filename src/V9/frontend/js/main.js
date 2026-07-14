@@ -6,7 +6,7 @@ window.addEventListener("message", ({ data }) => {
         showSummary(data.html);
     }
     if (data.type === "complete") {
-        completeStatus(data.html);
+        completeStatus(data.html, data.error, data.actionName, data.errorMessage);
     }
 });
 

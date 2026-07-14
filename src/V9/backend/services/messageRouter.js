@@ -16,7 +16,8 @@ export async function handleWebviewMessage({ message, panel, toPath, inTargetPat
             inTargetPath,
             generateFunc,
             inPort,
-            inFolderName: message.newFolderName
+            inFolderName: message.newFolderName,
+            actionName: action
         });
     }
 }
