@@ -18,7 +18,7 @@ export async function handleWebviewMessage({
         });
 
         return;
-    }
+    };
 
     await executeGenerationTask({
         panel,

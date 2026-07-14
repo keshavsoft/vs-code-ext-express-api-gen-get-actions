@@ -23,17 +23,19 @@ export async function executeGenerationTask({
             inGenerateRest: true,
             inPort, inFolderName
         });
-        console.log("fromNpm : ", fromNpm);
+        // console.log("fromNpm : ", fromNpm);
 
-        if (fromNpm && fromNpm.KTF === false) {
+        if (fromNpm && (fromNpm?.importResult?.found || fromNpm?.useResult?.found)) {
+
             panel.webview.postMessage({
                 type: "complete",
                 error: true,
                 actionName,
                 errorMessage: fromNpm.KReason || "An error occurred during generation."
             });
+
             return;
-        }
+        };
 
         panel.webview.postMessage({
             type: "complete",
