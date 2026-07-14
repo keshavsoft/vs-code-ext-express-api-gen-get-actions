@@ -1,23 +1,34 @@
-import * as apiActions from 'kschema-fs-api-gen-get-actions';
+import * as apiActions from "kschema-fs-api-gen-get-actions";
 import { executeGenerationTask } from "./generatorService.js";
 
-export async function handleWebviewMessage({ message, panel, toPath, inTargetPath,
+export async function handleWebviewMessage({
+    message,
+    panel,
+    toPath,
+    inTargetPath,
     inPort
 }) {
-    const action = message.action;
+    const { action } = message;
+    const generateFunc = apiActions[action];
 
-    if (action in apiActions) {
-        const generateFunc = apiActions[action];
-        await executeGenerationTask({
-            panel,
-            actionLabel: "With Header",
-            tableName: message.tableName,
-            toPath,
-            inTargetPath,
-            generateFunc,
-            inPort,
-            inFolderName: message.newFolderName,
-            actionName: action
+    if (typeof generateFunc !== "function") {
+        panel.webview.postMessage({
+            command: "error",
+            message: `Unknown action: ${action}`
         });
+
+        return;
     }
+
+    await executeGenerationTask({
+        panel,
+        actionLabel: "With Header",
+        tableName: message.tableName,
+        toPath,
+        inTargetPath,
+        generateFunc,
+        inPort,
+        inFolderName: message.newFolderName,
+        actionName: action
+    });
 }
