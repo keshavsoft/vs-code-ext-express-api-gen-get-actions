@@ -1,0 +1,62 @@
+name: NPM Publish
+
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      - name: Publish to npm
+        id: npm-publish
+        run: |
+          PACKAGE_NAME=$(jq -r .name package.json)
+          CURRENT_VERSION=$(jq -r .version package.json)
+          echo "package_name=$PACKAGE_NAME" >> $GITHUB_OUTPUT
+          echo "version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+          
+          if npm view "$PACKAGE_NAME@$CURRENT_VERSION" version >/dev/null 2>&1; then
+            echo "status=skipped" >> $GITHUB_OUTPUT
+            echo "Version $CURRENT_VERSION is already published on npm. Skipping publication."
+          else
+            npm publish
+            echo "status=published" >> $GITHUB_OUTPUT
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Generate summary
+        if: always()
+        run: |
+          STATUS="${{ steps.npm-publish.outputs.status }}"
+          VERSION="${{ steps.npm-publish.outputs.version }}"
+          PKG_NAME="${{ steps.npm-publish.outputs.package_name }}"
+          
+          echo "### 🚀 NPM Publication Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Package Name:** \`$PKG_NAME\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Version:** \`$VERSION\`" >> $GITHUB_STEP_SUMMARY
+          if [ "$STATUS" = "published" ]; then
+            echo "- **Status:** ✅ Successfully published to NPM!" >> $GITHUB_STEP_SUMMARY
+          elif [ "$STATUS" = "skipped" ]; then
+            echo "- **Status:** ⚠️ Skipped (version already exists on NPM)" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- **Status:** ❌ Failed or not run" >> $GITHUB_STEP_SUMMARY
+          fi
